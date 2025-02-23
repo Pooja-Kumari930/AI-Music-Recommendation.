@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Mood-Based Music Recommender</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fad0c4, #fbc2eb);
+            color: white;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+            color: #333;
+        }
+        h1 {
+            font-size: 28px;
+            font-weight: 600;
+            background: -webkit-linear-gradient(left, #ff512f, #dd2476);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .mood-buttons button {
+            background: linear-gradient(to right, #ff512f, #dd2476);
+            border: none;
+            padding: 12px 25px;
+            margin: 10px;
+            font-size: 16px;
+            border-radius: 30px;
+            cursor: pointer;
+            color: white;
+            font-weight: 600;
+            transition: 0.3s;
+            outline: none;
+        }
+        .mood-buttons button:hover {
+            background: linear-gradient(to right, #dd2476, #ff512f);
+            transform: scale(1.05);
+        }
+        .song-card {
+            background: #ffe0e9;
+            padding: 15px;
+            border-radius: 15px;
+            margin-top: 15px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
+            text-align: center;
+        }
+        .song-card img {
+            width: 120px;
+            border-radius: 10px;
+        }
+        .song-card h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #d6336c;
+        }
+        .audio-player {
+            margin-top: 10px;
+        }
+        .download-btn {
+            background: linear-gradient(to right, #28a745, #218838);
+            border: none;
+            padding: 10px 20px;
+            margin-top: 10px;
+            font-size: 16px;
+            border-radius: 30px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .download-btn:hover {
+            background: linear-gradient(to right, #218838, #28a745);
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>AI Music Recommendation</h1>
+        <p>Select your mood, and we'll suggest the perfect Hindi songs for you!</p>
+        
+        <div class="mood-buttons">
+            <button onclick="getSong('happy')">😊 Happy</button>
+            <button onclick="getSong('sad')">😢 Sad</button>
+            <button onclick="getSong('relaxed')">😌 Relaxed</button>
+            <button onclick="getSong('energetic')">⚡ Energetic</button>
+        </div>
+        
+        <h2>Recommended Songs:</h2>
+        <div id="song-result"></div>
+    </div>
+    
+    <script>
+        function getSong(mood) {
+            const songs = {
+                happy: { 
+                    title: "Gallan Goodiyan - Dil Dhadakne Do", 
+                    image: "images/", 
+                    audio: "https://example.com/gallan_goodiyan.mp3" 
+                },
+                sad: { 
+                    title: "Tujhe Bhula Diya - Anjaana Anjaani", 
+                    image: "https://example.com/sad.jpg", 
+                    audio: "https://example.com/tujhe_bhula_diya.mp3" 
+                },
+                relaxed: { 
+                    title: "Agar Tum Saath Ho - Tamasha", 
+                    image: "https://example.com/relaxed.jpg", 
+                    audio: "https://example.com/agar_tum_saath_ho.mp3" 
+                },
+                energetic: { 
+                    title: "Malhari - Bajirao Mastani", 
+                    image: "https://example.com/energetic.jpg", 
+                    audio: "https://example.com/malhari.mp3" 
+                }
+            };
+
+            const song = songs[mood];
+            if (song) {
+                document.getElementById("song-result").innerHTML = `
+                    <div class="song-card">
+                        <img src="${song.image}" alt="${song.title}">
+                        <h3>${song.title}</h3>
+                        <audio class="audio-player" controls>
+                            <source src="${song.audio}" type="audio/mpeg">
+                            Your browser does not support the audio element.
+                        </audio>
+                        <br>
+                        <a href="${song.audio}" download class="download-btn">Download</a>
+                    </div>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>
